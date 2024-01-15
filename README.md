@@ -1,5 +1,5 @@
 # Intro
-This repository presents a novel approach to optimize 4D matrix multiplications, particularly focused on enhancing Input/Output (IO) efficiency in Large Language Models (LLMs) by leveraging OpenAI's Triton. We introduce a block-based programming model that surpasses industry-standard cuBLAS, especially for non-square matrices. Our evaluation on an Nvidia A100 GPU demonstrates Triton's superiority in handling irregular matrix shapes and sizes. 
+This repository presents a novel approach to optimize 4D matrix multiplications, particularly focused on enhancing Input/Output (IO) efficiency in Large Language Models (LLMs) by leveraging OpenAI's Triton. The block-based programming model surpasses industry-standard cuBLAS, especially for non-square matrices. Our evaluation on an Nvidia A100 GPU demonstrates Triton's superiority in handling irregular matrix shapes and sizes. 
 
 The following are from the report submitted for the graduate course CPSC 538G at UBC, Fall Term 2023, instructed by Arpan Gujarati. The report is also included in this repository for further reading.
 
@@ -11,7 +11,7 @@ The following are from the report submitted for the graduate course CPSC 538G at
 # Implementation
 The heart of our implementation is the 4D matrix multiplication kernel in Triton. We extended a documented 2D matrix multiplier to the 4D case by calculating strides for navigating matrices and advancing block pointers.
 
-We employ an autotuner to select the optimal configuration for different matrix dimensions, enhancing Triton's adaptability to varying input sizes. The launch grid divides work by arranging blocks in a 1 to 3-dimensional grid, dynamically adjusting block sizes and warps based on the autotuner's recommendations.
+The triton autotuner selecta the optimal configuration for different matrix dimensions, enhancing Triton's adaptability to varying input sizes. The launch grid divides work by arranging blocks in a 1 to 3-dimensional grid, dynamically adjusting block sizes and warps based on the autotuner's recommendations.
 
 # Discussion
 We conducted several experiments to evaluate Triton's performance, including perfectly square matrices, LLAMA-2 dimensions, and start sequence dimensions. Triton consistently outperformed Pytorch in handling irregularly shaped matrices, demonstrating its effectiveness in optimizing 4D matrix operations in LLMs.
